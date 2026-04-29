@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Corne Fast Typing Layout</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div class="hero-mark">CORNE</div>
+        <div>
+          <p class="eyebrow">Vial / QMK Layout Share</p>
+          <h1>Corne Fast Typing Layout</h1>
+          <p class="subtitle">三层高速输入布局，默认从项目中的 <code>layout.vil</code> 生成。</p>
+        </div>
+      </header>
+
+      <section class="carousel" aria-label="Corne layer carousel">
+        <button class="carousel-arrow carousel-arrow-previous" data-action="previous" type="button" aria-label="上一层">
+          <span aria-hidden="true">‹</span>
+        </button>
+
+        <div data-layers class="layer-carousel" aria-live="polite"></div>
+
+        <button class="carousel-arrow carousel-arrow-next" data-action="next" type="button" aria-label="下一层">
+          <span aria-hidden="true">›</span>
+        </button>
+      </section>
+
+      <div data-dots class="carousel-dots" aria-label="Layer selector"></div>
+
+      <section data-description class="layer-description" aria-live="polite"></section>
+    </main>
+  </body>
+</html>
