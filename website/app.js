@@ -327,6 +327,13 @@
     };
   }
 
+  function getLayoutFetchPaths(pathname) {
+    const path = String(pathname || "");
+    const isNestedWebsitePath = path === "/website" || path.includes("/website/");
+
+    return isNestedWebsitePath ? ["../layout.vil", "layout.vil"] : ["layout.vil", "../layout.vil"];
+  }
+
   function formatKeycode(keycode) {
     if (keycode === -1 || keycode === null || typeof keycode === "undefined") {
       return {
@@ -517,16 +524,31 @@
     bindCarousel(app);
 
     try {
-      const response = await fetch("../layout.vil", { cache: "no-cache" });
-      if (!response.ok) {
-        throw new Error(`Default layout request failed with ${response.status}.`);
-      }
-
-      renderLayout(app, parseVilText(await response.text()));
+      renderLayout(app, parseVilText(await fetchDefaultLayoutText()));
     } catch (error) {
       console.warn("Default layout could not be fetched; using embedded fallback.", error);
       renderLayout(app, DEFAULT_VIL_DATA);
     }
+  }
+
+  async function fetchDefaultLayoutText() {
+    const errors = [];
+
+    for (const path of getLayoutFetchPaths(window.location.pathname)) {
+      try {
+        const response = await fetch(path, { cache: "no-cache" });
+
+        if (!response.ok) {
+          throw new Error(`${path} request failed with ${response.status}.`);
+        }
+
+        return response.text();
+      } catch (error) {
+        errors.push(error.message);
+      }
+    }
+
+    throw new Error(errors.join(" "));
   }
 
   function bindCarousel(app) {
@@ -778,6 +800,7 @@
     getCarouselCards,
     getDisplayLayers,
     getLayerDescription,
+    getLayoutFetchPaths,
     getNextLayerIndex,
     getTransitionDirection,
     init,

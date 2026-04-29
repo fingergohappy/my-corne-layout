@@ -8,6 +8,7 @@ const {
   getCarouselCards,
   getDisplayLayers,
   getLayerDescription,
+  getLayoutFetchPaths,
   getNextLayerIndex,
   getTransitionDirection,
   parseVilText,
@@ -121,6 +122,11 @@ test("returns Chinese README description for the active layer", () => {
     "数字键集中在上排，并贴近普通键盘数字排的相对位置。",
     "方向键放在右手主键区，便于编辑文本时快速移动光标。",
   ]);
+});
+
+test("chooses layout.vil fetch path for local website and deployed Pages URLs", () => {
+  assert.deepEqual(getLayoutFetchPaths("/website/"), ["../layout.vil", "layout.vil"]);
+  assert.deepEqual(getLayoutFetchPaths("/my-corne-layout/"), ["layout.vil", "../layout.vil"]);
 });
 
 test("builds a Corne split model from the current Vial matrix shape", () => {
