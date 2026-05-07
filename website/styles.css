@@ -222,12 +222,34 @@ h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 800; margin: 0; }
   place-items: center;
   box-shadow: 0 0.25rem 0 rgba(0, 0, 0, 0.4), 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
   transition: 
-    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.4s ease,
-    box-shadow 0.4s ease,
-    transform 0.2s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
     width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
     height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  cursor: pointer;
+}
+
+.key:hover {
+  transform: translateY(-0.35rem) scale(1.1);
+  border-color: var(--accent);
+  background: #24314d;
+  box-shadow: 
+    0 0.6rem 0 rgba(0, 0, 0, 0.4), 
+    0 1.25rem 2.5rem -0.5rem rgba(0, 0, 0, 0.5),
+    0 0 1.5rem var(--accent-soft);
+  z-index: 50;
+}
+
+.key:active {
+  transform: translateY(0.125rem) scale(0.96);
+  background: #0f172a;
+  box-shadow: 
+    0 0.0625rem 0 rgba(0, 0, 0, 0.4),
+    0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease;
 }
 
 .key-primary { 
